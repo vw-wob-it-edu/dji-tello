@@ -1,4 +1,4 @@
-package hu.atig.tello.sdk.core.communication.video;
+package hu.atig.tello.sdk.core.communication.state;
 
 import hu.atig.tello.sdk.core.model.drone.TelloConnectionConfiguration;
 
@@ -6,35 +6,32 @@ import java.io.IOException;
 import java.net.*;
 import java.util.logging.Logger;
 
-public class TelloStateListenerThread extends Thread {
+public class TelloStateStreamListenerThread extends Thread {
 
   private static final Logger logger = Logger
-      .getLogger(TelloStateListenerThread.class.getName());
+      .getLogger(TelloStateStreamListenerThread.class.getName());
 
   private boolean isStreamOn;
   private DatagramSocket ds;
   private byte[] receiveData = new byte[1024];
-  private final byte[] sendData = new byte[1024];
 
   /**
-   * Video stream IP address.
+   * State stream IP address.
    */
   private InetAddress listenIpAddress;
 
   /**
-   * Drones video stream UDP PORT.
+   * Drones state stream UDP PORT.
    */
   private Integer udpPort;
 
-  /**
-   * TODO.
-   */
-  public TelloStateListenerThread() {
-    logger.info("Initializing video thread");
+
+  public TelloStateStreamListenerThread() {
+    logger.info("Initializing state thread");
     isStreamOn = true;
     try {
       this.listenIpAddress = InetAddress.getByName(TelloConnectionConfiguration.DRONE_LISTEN_IP_ADDRESS);
-      this.udpPort = TelloConnectionConfiguration.COMMAND_PORT;
+      this.udpPort = TelloConnectionConfiguration.STATE_PORT;
     } catch (UnknownHostException e) {
       e.printStackTrace();
     }
@@ -42,10 +39,10 @@ public class TelloStateListenerThread extends Thread {
 
   @Override
   public void run() {
-    logger.info("Thread has started running....");
+    logger.info("Thread (state) has started running....");
     try {
       ds = new DatagramSocket(udpPort);
-      ds.connect(listenIpAddress, udpPort);
+      ds.bind(new InetSocketAddress(listenIpAddress, udpPort));
     } catch (SocketException e) {
       e.printStackTrace();
       return;
@@ -54,12 +51,12 @@ public class TelloStateListenerThread extends Thread {
     while (isStreamOn) {
       receiveData = new byte[345600];
       try {
-        logger.info("Waiting for data...");
+        logger.fine("Waiting for state data...");
         DatagramPacket receivePacket = new DatagramPacket(receiveData, receiveData.length);
         ds.receive(receivePacket);
-        logger.info("Packet received");
-        logger.info("Data" + receivePacket.toString());
+        logger.fine("Packet received");
 
+        // TODO: Process received data
       } catch (IOException e) {
         e.printStackTrace();
       }
@@ -72,7 +69,8 @@ public class TelloStateListenerThread extends Thread {
     return isStreamOn;
   }
 
-  public void stopThread(boolean streamOn) {
+  public void setStreamOn(boolean streamOn) {
     isStreamOn = false;
   }
+  
 }

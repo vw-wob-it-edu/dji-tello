@@ -1,5 +1,6 @@
 package hu.atig.tello.sdk.core.communication;
 
+import hu.atig.tello.sdk.core.communication.state.TelloStateStreamListenerThread;
 import hu.atig.tello.sdk.core.communication.video.TelloVideoStreamListenerThread;
 import hu.atig.tello.sdk.core.exception.BaseException;
 import hu.atig.tello.sdk.core.exception.CommandException;
@@ -40,6 +41,11 @@ public class DroneCommandExecutorImpl implements DroneCommandExecutor {
    * Tello video stream listener thread.
    */
   private TelloVideoStreamListenerThread videoStreamListenerThread;
+
+  /**
+   * Tello state stream listener thread.
+   */
+  private TelloStateStreamListenerThread stateStreamListenerThread;
 
   /**
    * Constructor that initialises IP address and UDP port of the drone.
@@ -143,6 +149,27 @@ public class DroneCommandExecutorImpl implements DroneCommandExecutor {
     logger.info("Stopping video stream.");
     if (videoStreamListenerThread != null && !videoStreamListenerThread.isStreamOn()) {
       videoStreamListenerThread.setStreamOn(false);
+    }
+  }
+  
+  @Override
+  public void startStateStream() {
+    logger.info("Starting state stream....");
+    if (stateStreamListenerThread != null && stateStreamListenerThread.isStreamOn()) {
+      stateStreamListenerThread.setStreamOn(false);
+      stateStreamListenerThread = new TelloStateStreamListenerThread();
+      stateStreamListenerThread.start();
+    } else {
+      stateStreamListenerThread = new TelloStateStreamListenerThread();
+      stateStreamListenerThread.start();
+    }
+  }
+
+  @Override
+  public void stopStateStream() {
+    logger.info("Stopping state stream.");
+    if (stateStreamListenerThread != null && !stateStreamListenerThread.isStreamOn()) {
+      stateStreamListenerThread.setStreamOn(false);
     }
   }
 

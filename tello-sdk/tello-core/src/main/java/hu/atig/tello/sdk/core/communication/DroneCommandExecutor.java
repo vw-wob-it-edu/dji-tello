@@ -30,6 +30,10 @@ public interface DroneCommandExecutor {
   void startVideoStream();
 
   void stopVideoStream();
+  
+  void startStateStream();
+  
+  void stopStateStream();
 
   void disconnect();
 

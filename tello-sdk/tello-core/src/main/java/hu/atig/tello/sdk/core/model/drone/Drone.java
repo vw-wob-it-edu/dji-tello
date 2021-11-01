@@ -37,28 +37,33 @@ public interface Drone {
     void doFlip(Flip flip);
 
     /**
-     * Settign the drone's speed.
+     * Setting the drone's speed.
      *
      * @param speed Chosen speed.
      */
     void setSpeed(Integer speed);
+    
+    void up(Integer elevation);
+    void down(Integer elevation);
 
     void forward(Integer distance);
-
     void backward(Integer distance);
-
     void right(Integer distance);
-
     void left(Integer distance);
 
     void rotateRight(Integer angle);
-
     void rotateLeft(Integer angle);
+    
+    void go(Integer x, Integer y, Integer z, Integer speed);
+    void curve(Integer x1, Integer y1, Integer z1, Integer x2, Integer y2, Integer z2, Integer speed);
 
     void refreshTelloOnBoarData();
 
-    void startStream();
-
-    void stopStream();
+    void startVideoStream();
+    void stopVideoStream();
+    
+    void startStateStream();
+    void stopStateStream();
+    
 
 }

@@ -64,7 +64,7 @@ public class TelloCommandValues {
   /**
    * Fly backward xx (xx = 20 - 500 cm).
    */
-  public static final String BACK = "back";
+  public static final String BACKWARD = "back";
 
   /**
    * Rotate clockwise x° (x = 1-3600°).

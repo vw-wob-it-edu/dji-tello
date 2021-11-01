@@ -67,12 +67,12 @@ public class TelloCommandValues {
   public static final String BACKWARD = "back";
 
   /**
-   * Rotate clockwise xÂ° (x = 1-3600Â°).
+   * Rotate clockwise x° (x = 1-3600°).
    */
   public static final String CW = "cw";
 
   /**
-   * Rotate counter-clockwise xÂ° (x = 1-3600Â°).
+   * Rotate counter-clockwise x° (x = 1-3600°).
    */
   public static final String CCW = "ccw";
 
@@ -84,17 +84,17 @@ public class TelloCommandValues {
 
 
   /**
-   * Fly to â€œxâ€� â€œyâ€� â€œzâ€� at â€œspeedâ€� (cm/s). go x y z speed â€œxâ€� = -500-500 â€œyâ€� = -500-500 â€œzâ€� =
-   * -500-500 â€œspeedâ€� = 10-100 Note: â€œxâ€�, â€œyâ€�, and â€œzâ€� values canâ€™t be set between -20 â€“ 20
+   * Fly to “x” “y” “z” at “speed” (cm/s). go x y z speed “x” = -500-500 “y” = -500-500 “z” =
+   * -500-500 “speed” = 10-100 Note: “x”, “y”, and “z” values can’t be set between -20 – 20
    * simultaneously.
    */
   public static final String GO = "go";
 
   /**
-   * Fly at a curve according to the two given coordinates at â€œspeedâ€� (cm/s). If the arc radius is
-   * not within a range of 0.5-10 meters, it will respond with an error. â€œx1â€�, â€œx2â€� = -500-500 â€œy1â€�,
-   * â€œy2â€� = -500-500 â€œz1â€�, â€œz2â€� = -500-500 â€œspeedâ€� = 10-60 Note: â€œxâ€�, â€œyâ€�, and â€œzâ€� values canâ€™t be
-   * set between -20 â€“ 20 simultaneously.
+   * Fly at a curve according to the two given coordinates at “speed” (cm/s). If the arc radius is
+   * not within a range of 0.5-10 meters, it will respond with an error. “x1”, “x2” = -500-500 “y1”,
+   * “y2” = -500-500 “z1”, “z2” = -500-500 “speed” = 10-60 Note: “x”, “y”, and “z” values can’t be
+   * set between -20 – 20 simultaneously.
    */
   public static final String CURVE = "curve";
 
@@ -131,7 +131,7 @@ public class TelloCommandValues {
   public static final String CURRENT_HEIGHT = "height?";
 
   /**
-   * Obtain current temperature of the drone (CÂ°, x: 0-90).
+   * Obtain current temperature of the drone (C°, x: 0-90).
    */
   public static final String CURRENT_TEMPERATURE = "temp?";
 
@@ -151,7 +151,7 @@ public class TelloCommandValues {
   public static final String CURRENT_ACCELERATION = "acceleration?";
 
   /**
-   * Obtain distance value from TOFï¼ˆcm, x: 30-1000ï¼‰.
+   * Obtain distance value from TOF（cm, x: 30-1000）.
    */
   public static final String TOF = "tof?";
 
